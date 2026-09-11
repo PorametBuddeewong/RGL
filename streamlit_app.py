@@ -94,17 +94,18 @@ if "suppliers" not in st.session_state:
     st.session_state.suppliers = []
 
 PRESET_SUPPLIERS = {
-    "Custom (Manual Input)": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90},
-    "New Bio": {"conv": 0.8204, "naoh": 1.14, "fac": 0.53, "rac": 2.14, "elec": 116.404, "water": 3.749, "fuel": 1.339, "n2": 1.446, "biogas": 104.391, "ygl": 1.0, "glr": 5.088},
-    "East Bio": {"conv": 0.7850, "naoh": 1.10, "fac": 0.51, "rac": 2.04, "elec": 111.384, "water": 3.587, "fuel": 1.281, "n2": 1.384, "biogas": 99.889, "ygl": 1.0, "glr": 6.149},
-    "Bangchak Bio": {"conv": 0.8164, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.837, "water": 3.731, "fuel": 1.333, "n2": 1.439, "biogas": 103.882, "ygl": 1.0, "glr": 5.208},
-    "Seastar-Indo": {"conv": 0.7747, "naoh": 1.08, "fac": 0.50, "rac": 2.02, "elec": 109.914, "water": 3.540, "fuel": 1.264, "n2": 1.366, "biogas": 98.571, "ygl": 1.0, "glr": 6.460},
-    "Seastar-2 SEA": {"conv": 0.7666, "naoh": 1.07, "fac": 0.50, "rac": 2.00, "elec": 108.771, "water": 3.503, "fuel": 1.251, "n2": 1.351, "biogas": 97.545, "ygl": 1.0, "glr": 6.702},
-    "Itochu (PPP)": {"conv": 0.7712, "naoh": 1.08, "fac": 0.50, "rac": 2.01, "elec": 109.423, "water": 3.524, "fuel": 1.259, "n2": 1.359, "biogas": 98.131, "ygl": 1.0, "glr": 6.564},
-    "Sojit (LDC)": {"conv": 0.8175, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.988, "water": 3.736, "fuel": 1.334, "n2": 1.441, "biogas": 104.018, "ygl": 1.0, "glr": 5.176},
-    "Agri oil 1": {"conv": 0.8609, "naoh": 1.20, "fac": 0.56, "rac": 2.24, "elec": 122.151, "water": 3.934, "fuel": 1.405, "n2": 1.518, "biogas": 109.545, "ygl": 1.0, "glr": 3.873},
-    "Agri oil 2": {"conv": 0.8247, "naoh": 1.15, "fac": 0.54, "rac": 2.15, "elec": 117.014, "water": 3.769, "fuel": 1.346, "n2": 1.454, "biogas": 104.938, "ygl": 1.0, "glr": 4.959},
-    "PPP (High pH)-Jan25": {"conv": 0.7473, "naoh": 1.11, "fac": 0.49, "rac": 1.95, "elec": 115.988, "water": 3.542, "fuel": 1.223, "n2": 1.600, "biogas": 102.156, "ygl": 1.0, "glr": 7.281}
+    "Custom (Manual Input)": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90, "ds": 3.1},
+    "CGL ME2": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90, "ds":  3.1},
+    "New Bio": {"conv": 0.8204, "naoh": 1.14, "fac": 0.53, "rac": 2.14, "elec": 116.404, "water": 3.749, "fuel": 1.339, "n2": 1.446, "biogas": 104.391, "ygl": 1.0, "glr": 5.088, "ds":  2.95726},
+    "East Bio": {"conv": 0.7850, "naoh": 1.10, "fac": 0.51, "rac": 2.04, "elec": 111.384, "water": 3.587, "fuel": 1.281, "n2": 1.384, "biogas": 99.889, "ygl": 1.0, "glr": 6.149, "ds":   2.82972},
+    "Bangchak Bio": {"conv": 0.8164, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.837, "water": 3.731, "fuel": 1.333, "n2": 1.439, "biogas": 103.882, "ygl": 1.0, "glr": 5.208, "ds":  2.94284},
+    "Seastar-Indo": {"conv": 0.7747, "naoh": 1.08, "fac": 0.50, "rac": 2.02, "elec": 109.914, "water": 3.540, "fuel": 1.264, "n2": 1.366, "biogas": 98.571, "ygl": 1.0, "glr": 6.460, "ds":  2.79237},
+    "Seastar-2 SEA": {"conv": 0.7666, "naoh": 1.07, "fac": 0.50, "rac": 2.00, "elec": 108.771, "water": 3.503, "fuel": 1.251, "n2": 1.351, "biogas": 97.545, "ygl": 1.0, "glr": 6.702, "ds":  2.76333},
+    "Itochu (PPP)": {"conv": 0.7712, "naoh": 1.08, "fac": 0.50, "rac": 2.01, "elec": 109.423, "water": 3.524, "fuel": 1.259, "n2": 1.359, "biogas": 98.131, "ygl": 1.0, "glr": 6.564, "ds":  2.77991},
+    "Sojit (LDC)": {"conv": 0.8175, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.988, "water": 3.736, "fuel": 1.334, "n2": 1.441, "biogas": 104.018, "ygl": 1.0, "glr": 5.176, "ds":  2.94667},
+    "Agri oil 1": {"conv": 0.8609, "naoh": 1.20, "fac": 0.56, "rac": 2.24, "elec": 122.151, "water": 3.934, "fuel": 1.405, "n2": 1.518, "biogas": 109.545, "ygl": 1.0, "glr": 3.873, "ds":  3.10324},
+    "Agri oil 2": {"conv": 0.8247, "naoh": 1.15, "fac": 0.54, "rac": 2.15, "elec": 117.014, "water": 3.769, "fuel": 1.346, "n2": 1.454, "biogas": 104.938, "ygl": 1.0, "glr": 4.959, "ds":  2.97276},
+    "PPP (High pH)-Jan25": {"conv": 0.7473, "naoh": 1.11, "fac": 0.49, "rac": 1.95, "elec": 115.988, "water": 3.542, "fuel": 1.223, "n2": 1.600, "biogas": 102.156, "ygl": 1.0, "glr": 7.281, "ds":  2.69371}
 }
 
 # =============================================================================
@@ -132,17 +133,29 @@ with st.sidebar:
         fuel_p = st.number_input("Fuel Oil Cost (THB/Ton)", value=14514.0)
         biogas_p = st.number_input("Biogas Cost (THB/m3)", value=6.41)
         n2_p = st.number_input("Nitrogen Gas Cost (THB/m3)", value=6.18)
+        ds_p = st.number_input("Diesel Cost (THB/L)", value=30.00)
 
     with st.expander("🏭 4. Rayong Operational Cost Parameters", expanded=False):
         cgl_80_p_usd = st.number_input("CGL 80% Price (USD/MT)", value=777.89)
         dmw_p_usd = st.number_input("DMW Price (USD/unit)", value=2.019)
         bfw_p_usd = st.number_input("BFW Price (USD/unit)", value=6.368)
 
-    with st.expander("🏗️ 5. Current Plant (ME2) OVC Parameter", expanded=False):
-        ovc_ext_usd_mt_rgl = st.number_input(
-            "ME2 Other Variable Cost / OVC (USD/MT RGL)",
+    with st.expander("🏗️ 5. Other Parameter", expanded=False):
+        ovc_ext_usd_mt_rgl1 = st.number_input(
+            "ME1 Other Variable Cost / OVC (USD/MT RGL)",
             value=89.00,
+            help="Other Variable Cost per MT of finished RGL produced at the current external plant (ME1). Deducted from Contribution Margin."
+        )
+
+        ovc_ext_usd_mt_rgl2 = st.number_input(
+            "ME2 Other Variable Cost / OVC (USD/MT RGL)",
+            value=8.00,
             help="Other Variable Cost per MT of finished RGL produced at the current external plant (ME2). Deducted from Contribution Margin."
+        )
+         ovc_ext_usd_mt_rgl12 = st.number_input(
+            "ME2 to ME1 Delivery Cost (USD/MT CGL)",
+            value=40.00,
+            help="Delivery Cost per MT of CGL from plant ME2 to ME1"
         )
 
 # =============================================================================
@@ -168,17 +181,22 @@ def calculate_rgl_external(suppliers, rgl_p_thb):
         fuel_cost   = feed * (s["fuel"] * fuel_p)/72
         n2_cost     = feed * (s["n2"] * n2_p)
         biogas_cost = feed * (s["biogas"] * biogas_p)
-        util_cost   = elec_cost + water_cost + fuel_cost + n2_cost + biogas_cost
+        Diesel_cost = feed* (s["ds"] * ds_p)
+        util_cost   = elec_cost + water_cost + fuel_cost + n2_cost + biogas_cost + Diesel_cost
         
         ygl_cr    = feed * (s["ygl_conv"] / 100) * ygl_p_usd * fx
         gl_res_cr = feed * (s["gl_res_conv"] / 100) * gl_res_p_usd * fx
         bp_credit = ygl_cr + gl_res_cr
 
         rgl_out = feed * conv
+
+        gr_sl = feed - rgl_out - feed * (s["ygl_conv"] / 100) - feed * (s["gl_res_conv"] / 100) 
+        dis_cost = gr_sl*2950
+        
         feed_cost = feed * cgl_price * 1000
         # OVC deduction: Other Variable Cost per MT of RGL produced (converted THB)
-        ovc_total_thb = rgl_out * ovc_ext_usd_mt_rgl * fx
-        total_cost = feed_cost + chem_cost + util_cost + ovc_total_thb - bp_credit
+        ovc_total_thb = rgl_out * ovc_ext_usd_mt_rgl2 * fx
+        total_cost = feed_cost + chem_cost + util_cost + ovc_total_thb - bp_credit + dis_cost
         revenue = rgl_p_thb * rgl_out * 1000
         
         cm_thb_kg = (revenue - total_cost) / (rgl_out * 1000) if rgl_out > 0 else 0
@@ -204,8 +222,8 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
     results = []
     # Rayong Standardized Matrix Settings
     rayong_conv = 0.75500
-    logistics_cost_usd_mt_cgl = 40.00
-    ovc_usd_mt_rgl = 89.00
+    logistics_cost_usd_mt_cgl = ovc_ext_usd_mt_rgl12
+    ovc_usd_mt_rgl = ovc_ext_usd_mt_rgl1
     
     for s in suppliers:
         feed = s["qty"]
@@ -224,25 +242,30 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
         cfw_cost_usd = feed * 0.84234 * (water_p / fx)
         dmw_cost_usd = feed * 0.09955 * dmw_p_usd
         bfw_cost_usd = feed * 0.32987 * bfw_p_usd
+
+        util1_cost = n2_cost_usd+cfw_cost_usd+dmw_cost_usd+bfw_cost_usd
         
         # NaOH conversion assumption: Treated as chemical rate relative to standard unit values
         naoh_cost_usd = feed * 0.02356 * (naoh_p * 1000 / fx) 
         
         fac_cost_usd = feed * 0.00088 * fac_p_usd
         rac_cost_usd = feed * 0.00377 * rac_p_usd
+        chem1_cost = naoh_cost_usd+ fac_cost_usd +rac_cost_usd
         
-        variable_costs_usd = n2_cost_usd + cfw_cost_usd + dmw_cost_usd + bfw_cost_usd + naoh_cost_usd + fac_cost_usd + rac_cost_usd
+        variable_costs_usd = util1_cost + chem1_cost
         
         # 4. Other Variable Cost (OVC)
         rgl_out = feed * rayong_conv
         ovc_total_usd = rgl_out * ovc_usd_mt_rgl
+
+        wasteres_vol = 0.0282*feed
+        dis1_cost = wasteres_vol*2950/fx
         
-        total_vc_usd = variable_costs_usd + ovc_total_usd
+        total_vc_usd = variable_costs_usd + ovc_total_usd + dis1_cost
         
         # 5. By-product Credits Engine
         ygl_credit_usd = feed * 0.1450 * ygl_p_usd
         gl_res_credit_usd = feed * 0.0360 * gl_res_p_usd
-        # Waste residue evaluated at 0 USD as defined
         cgl_80_credit_usd = feed * 0.0358 * cgl_80_p_usd
         
         total_bp_credit_usd = ygl_credit_usd + gl_res_credit_usd + cgl_80_credit_usd
@@ -322,7 +345,7 @@ if total_rayong_rgl > 0:
     tot_rayong_operational_vc_usd = sum(r["variable_costs_usd"] for r in rayong_results)
     tot_rayong_ovc_usd = sum(r["ovc_total_usd"] for r in rayong_results)
     
-    be_rayong_cgl_price_usd_mt = (rgl_p_usd * rayong_weighted_conv) - 40.00 - (tot_rayong_vc_usd / total_rayong_feed) + (tot_rayong_bp_usd / total_rayong_feed)
+    be_rayong_cgl_price_usd_mt = (rgl_p_usd * rayong_weighted_conv) - ovc_ext_usd_mt_rgl12 - (tot_rayong_vc_usd / total_rayong_feed) + (tot_rayong_bp_usd / total_rayong_feed)
     be_rayong_cgl_purchase_price_thb = be_rayong_cgl_price_usd_mt * fx / 1000
 else:
     rayong_weighted_conv = 0.75500; rayong_logistics_usd_mt_rgl = 0.0; rayong_vc_usd_mt_rgl = 0.0; rayong_bp_usd_mt_rgl = 0.0
