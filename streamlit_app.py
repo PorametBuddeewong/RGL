@@ -381,7 +381,9 @@ with tab1:
         )
     with col_p2:
         st.metric(
-         
+             label="ICIS Recommended Price Benchmark", 
+            value="1,120 USD/MT", 
+            help="Current benchmark index valuation updated from ICIS metrics."
         )
     
     selected_preset_name = st.selectbox(
