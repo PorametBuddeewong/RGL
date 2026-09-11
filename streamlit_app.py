@@ -243,8 +243,9 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
         cfw_cost_usd = feed * 1.343 * (water_p / fx)
         dmw_cost_usd = feed * 0.13351 * dmw_p_usd
         bfw_cost_usd = feed * 0.33844 * bfw_p_usd
+        stm_cost_usd = feed * 1.23 * 36.685
 
-        util1_cost = n2_cost_usd + cfw_cost_usd + dmw_cost_usd + bfw_cost_usd
+        util1_cost = n2_cost_usd + cfw_cost_usd + dmw_cost_usd + bfw_cost_usd + stm_cost_usd
         
         naoh_cost_usd = feed * 0.02417 * (naoh_p * 1000 / fx) 
         fac_cost_usd = feed * 0.00091 * fac_p_usd
