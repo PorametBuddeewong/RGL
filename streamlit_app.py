@@ -152,7 +152,7 @@ with st.sidebar:
             value=8.00,
             help="Other Variable Cost per MT of finished RGL produced at the current external plant (ME2). Deducted from Contribution Margin."
         )
-         ovc_ext_usd_mt_rgl12 = st.number_input(
+        ovc_ext_usd_mt_rgl12 = st.number_input(
             "ME2 to ME1 Delivery Cost (USD/MT CGL)",
             value=40.00,
             help="Delivery Cost per MT of CGL from plant ME2 to ME1"
