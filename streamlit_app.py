@@ -216,6 +216,7 @@ def calculate_rgl_external(suppliers, rgl_p_thb):
             "name": s["name"], "feed": feed, "rgl_out": rgl_out,
             "feed_cost": feed_cost, "chem_cost": chem_cost,
             "util_cost": util_cost, "bp_credit": bp_credit,
+            "dis_cost": dis_cost,
             "ovc_total_thb": ovc_total_thb,
             "total_cost": total_cost, "cm": cm_thb_kg, "cm_usd": cm_usd_mt,
             "breakdown_thb": breakdown_thb, "conv": conv
