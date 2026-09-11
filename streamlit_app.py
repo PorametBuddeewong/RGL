@@ -181,7 +181,7 @@ def calculate_rgl_external(suppliers, rgl_p_thb):
         fuel_cost   = feed * (s["fuel"] * fuel_p)/72
         n2_cost     = feed * (s["n2"] * n2_p)
         biogas_cost = feed * (s["biogas"] * biogas_p)
-        Diesel_cost = feed* (s["ds"] * ds_p)
+        Diesel_cost = feed * (s.get("ds", 0.0) * ds_p)
         util_cost   = elec_cost + water_cost + fuel_cost + n2_cost + biogas_cost + Diesel_cost
         
         ygl_cr    = feed * (s["ygl_conv"] / 100) * ygl_p_usd * fx
