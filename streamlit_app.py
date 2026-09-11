@@ -141,7 +141,7 @@ with st.sidebar:
         ds_p = st.number_input("Diesel Cost (THB/L)", value=30.00)
 
     with st.expander("🏭 4. Rayong Operational Cost Parameters", expanded=False):
-        cgl_80_p_usd = st.number_input("CGL 80% Price (USD/MT)", value=572.89)
+        cgl_80_p_usd = st.number_input("CGL 80% Price (USD/MT)", value=587.89)
         dmw_p_usd = st.number_input("DMW Price (USD/unit)", value=2.019)
         bfw_p_usd = st.number_input("BFW Price (USD/unit)", value=6.368)
 
@@ -238,16 +238,16 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
         
         logistics_cost_usd = feed * logistics_cost_usd_mt_cgl
         
-        n2_cost_usd = feed *  5.51772 * (n2_p / fx)
-        cfw_cost_usd = feed *  1.34300 * (water_p / fx)
-        dmw_cost_usd = feed *  0.13351  * dmw_p_usd
-        bfw_cost_usd = feed *  0.33844 * bfw_p_usd
+        n2_cost_usd = feed * 5.37803 * (n2_p / fx)
+        cfw_cost_usd = feed * 0.84234 * (water_p / fx)
+        dmw_cost_usd = feed * 0.09955 * dmw_p_usd
+        bfw_cost_usd = feed * 0.32987 * bfw_p_usd
 
         util1_cost = n2_cost_usd + cfw_cost_usd + dmw_cost_usd + bfw_cost_usd
         
-        naoh_cost_usd = feed * 0.02456 * (naoh_p * 1000 / fx) 
-        fac_cost_usd = feed * 0.00091 * fac_p_usd
-        rac_cost_usd = feed * 0.00387 * rac_p_usd
+        naoh_cost_usd = feed * 0.02356 * (naoh_p * 1000 / fx) 
+        fac_cost_usd = feed * 0.00088 * fac_p_usd
+        rac_cost_usd = feed * 0.00377 * rac_p_usd
         chem1_cost = naoh_cost_usd + fac_cost_usd + rac_cost_usd
         
         variable_costs_usd = util1_cost + chem1_cost
@@ -260,8 +260,8 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
         
         total_vc_usd = variable_costs_usd + ovc_total_usd + dis1_cost
         
-        ygl_credit_usd = feed * 0.1250 * ygl_p_usd
-        gl_res_credit_usd = feed * 0.0060 * gl_res_p_usd
+        ygl_credit_usd = feed * 0.1450 * ygl_p_usd
+        gl_res_credit_usd = feed * 0.0360 * gl_res_p_usd
         cgl_80_credit_usd = feed * 0.0358 * cgl_80_p_usd
         
         total_bp_credit_usd = ygl_credit_usd + gl_res_credit_usd + cgl_80_credit_usd
@@ -381,9 +381,7 @@ with tab1:
         )
     with col_p2:
         st.metric(
-            label="ICIS Recommended Price Benchmark", 
-            value="1,120 USD/MT", 
-            help="Current benchmark index valuation updated from ICIS metrics."
+         
         )
     
     selected_preset_name = st.selectbox(
