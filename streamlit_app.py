@@ -90,23 +90,28 @@ st.markdown("""
 # =============================================================================
 # 2. STATE MANAGEMENT & PRESETS 
 # =============================================================================
-if "suppliers" not in st.session_state:
-    st.session_state.suppliers = []
-
 PRESET_SUPPLIERS = {
     "Custom (Manual Input)": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90, "ds": 3.1},
-    "CGL ME2": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90, "ds":  3.1},
-    "New Bio": {"conv": 0.8204, "naoh": 1.14, "fac": 0.53, "rac": 2.14, "elec": 116.404, "water": 3.749, "fuel": 1.339, "n2": 1.446, "biogas": 104.391, "ygl": 1.0, "glr": 5.088, "ds":  2.95726},
-    "East Bio": {"conv": 0.7850, "naoh": 1.10, "fac": 0.51, "rac": 2.04, "elec": 111.384, "water": 3.587, "fuel": 1.281, "n2": 1.384, "biogas": 99.889, "ygl": 1.0, "glr": 6.149, "ds":   2.82972},
-    "Bangchak Bio": {"conv": 0.8164, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.837, "water": 3.731, "fuel": 1.333, "n2": 1.439, "biogas": 103.882, "ygl": 1.0, "glr": 5.208, "ds":  2.94284},
-    "Seastar-Indo": {"conv": 0.7747, "naoh": 1.08, "fac": 0.50, "rac": 2.02, "elec": 109.914, "water": 3.540, "fuel": 1.264, "n2": 1.366, "biogas": 98.571, "ygl": 1.0, "glr": 6.460, "ds":  2.79237},
-    "Seastar-2 SEA": {"conv": 0.7666, "naoh": 1.07, "fac": 0.50, "rac": 2.00, "elec": 108.771, "water": 3.503, "fuel": 1.251, "n2": 1.351, "biogas": 97.545, "ygl": 1.0, "glr": 6.702, "ds":  2.76333},
-    "Itochu (PPP)": {"conv": 0.7712, "naoh": 1.08, "fac": 0.50, "rac": 2.01, "elec": 109.423, "water": 3.524, "fuel": 1.259, "n2": 1.359, "biogas": 98.131, "ygl": 1.0, "glr": 6.564, "ds":  2.77991},
-    "Sojit (LDC)": {"conv": 0.8175, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.988, "water": 3.736, "fuel": 1.334, "n2": 1.441, "biogas": 104.018, "ygl": 1.0, "glr": 5.176, "ds":  2.94667},
-    "Agri oil 1": {"conv": 0.8609, "naoh": 1.20, "fac": 0.56, "rac": 2.24, "elec": 122.151, "water": 3.934, "fuel": 1.405, "n2": 1.518, "biogas": 109.545, "ygl": 1.0, "glr": 3.873, "ds":  3.10324},
-    "Agri oil 2": {"conv": 0.8247, "naoh": 1.15, "fac": 0.54, "rac": 2.15, "elec": 117.014, "water": 3.769, "fuel": 1.346, "n2": 1.454, "biogas": 104.938, "ygl": 1.0, "glr": 4.959, "ds":  2.97276},
-    "PPP (High pH)-Jan25": {"conv": 0.7473, "naoh": 1.11, "fac": 0.49, "rac": 1.95, "elec": 115.988, "water": 3.542, "fuel": 1.223, "n2": 1.600, "biogas": 102.156, "ygl": 1.0, "glr": 7.281, "ds":  2.69371}
+    "CGL ME2": {"conv": 0.8600, "naoh": 1.20, "fac": 0.50, "rac": 1.90, "elec": 122.0, "water": 3.90, "fuel": 1.40, "n2": 1.50, "biogas": 109.0, "ygl": 1.0, "glr": 3.90, "ds": 3.1},
+    "New Bio": {"conv": 0.8204, "naoh": 1.14, "fac": 0.53, "rac": 2.14, "elec": 116.404, "water": 3.749, "fuel": 1.339, "n2": 1.446, "biogas": 104.391, "ygl": 1.0, "glr": 5.088, "ds": 2.95726},
+    "East Bio": {"conv": 0.7850, "naoh": 1.10, "fac": 0.51, "rac": 2.04, "elec": 111.384, "water": 3.587, "fuel": 1.281, "n2": 1.384, "biogas": 99.889, "ygl": 1.0, "glr": 6.149, "ds": 2.82972},
+    "Bangchak Bio": {"conv": 0.8164, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.837, "water": 3.731, "fuel": 1.333, "n2": 1.439, "biogas": 103.882, "ygl": 1.0, "glr": 5.208, "ds": 2.94284},
+    "Seastar-Indo": {"conv": 0.7747, "naoh": 1.08, "fac": 0.50, "rac": 2.02, "elec": 109.914, "water": 3.540, "fuel": 1.264, "n2": 1.366, "biogas": 98.571, "ygl": 1.0, "glr": 6.460, "ds": 2.79237},
+    "Seastar-2 SEA": {"conv": 0.7666, "naoh": 1.07, "fac": 0.50, "rac": 2.00, "elec": 108.771, "water": 3.503, "fuel": 1.251, "n2": 1.351, "biogas": 97.545, "ygl": 1.0, "glr": 6.702, "ds": 2.76333},
+    "Itochu (PPP)": {"conv": 0.7712, "naoh": 1.08, "fac": 0.50, "rac": 2.01, "elec": 109.423, "water": 3.524, "fuel": 1.259, "n2": 1.359, "biogas": 98.131, "ygl": 1.0, "glr": 6.564, "ds": 2.77991},
+    "Sojit (LDC)": {"conv": 0.8175, "naoh": 1.14, "fac": 0.53, "rac": 2.13, "elec": 115.988, "water": 3.736, "fuel": 1.334, "n2": 1.441, "biogas": 104.018, "ygl": 1.0, "glr": 5.176, "ds": 2.94667},
+    "Agri oil 1": {"conv": 0.8609, "naoh": 1.20, "fac": 0.56, "rac": 2.24, "elec": 122.151, "water": 3.934, "fuel": 1.405, "n2": 1.518, "biogas": 109.545, "ygl": 1.0, "glr": 3.873, "ds": 3.10324},
+    "Agri oil 2": {"conv": 0.8247, "naoh": 1.15, "fac": 0.54, "rac": 2.15, "elec": 117.014, "water": 3.769, "fuel": 1.346, "n2": 1.454, "biogas": 104.938, "ygl": 1.0, "glr": 4.959, "ds": 2.97276},
+    "PPP (High pH)-Jan25": {"conv": 0.7473, "naoh": 1.11, "fac": 0.49, "rac": 1.95, "elec": 115.988, "water": 3.542, "fuel": 1.223, "n2": 1.600, "biogas": 102.156, "ygl": 1.0, "glr": 7.281, "ds": 2.69371}
 }
+
+if "suppliers" not in st.session_state:
+    st.session_state.suppliers = []
+else:
+    # Safe check: ensure 'ds' exists in all existing supplier objects
+    for s in st.session_state.suppliers:
+        if "ds" not in s:
+            s["ds"] = PRESET_SUPPLIERS.get(s["name"], {}).get("ds", 0.0)
 
 # =============================================================================
 # 3. GLOBAL VARIABLES AND SIDEBAR INPUTS
@@ -191,10 +196,9 @@ def calculate_rgl_external(suppliers, rgl_p_thb):
         rgl_out = feed * conv
 
         gr_sl = feed - rgl_out - feed * (s["ygl_conv"] / 100) - feed * (s["gl_res_conv"] / 100) 
-        dis_cost = gr_sl*2950
+        dis_cost = gr_sl * 2950
         
         feed_cost = feed * cgl_price * 1000
-        # OVC deduction: Other Variable Cost per MT of RGL produced (converted THB)
         ovc_total_thb = rgl_out * ovc_ext_usd_mt_rgl2 * fx
         total_cost = feed_cost + chem_cost + util_cost + ovc_total_thb - bp_credit + dis_cost
         revenue = rgl_p_thb * rgl_out * 1000
@@ -220,7 +224,6 @@ def calculate_rgl_external(suppliers, rgl_p_thb):
 
 def calculate_rgl_rayong(suppliers, rgl_p_usd):
     results = []
-    # Rayong Standardized Matrix Settings
     rayong_conv = 0.75500
     logistics_cost_usd_mt_cgl = ovc_ext_usd_mt_rgl12
     ovc_usd_mt_rgl = ovc_ext_usd_mt_rgl1
@@ -230,47 +233,39 @@ def calculate_rgl_rayong(suppliers, rgl_p_usd):
         if feed <= 0:
             continue
             
-        # 1. Feedstock Cost (Base CGL Price from UI input converted to USD/MT)
         cgl_price_usd_mt = (s["price"] * 1000) / fx
         feed_cost_usd = feed * cgl_price_usd_mt
         
-        # 2. Logistics Cost Matrix
         logistics_cost_usd = feed * logistics_cost_usd_mt_cgl
         
-        # 3. Consumption Costs (Rates normalized per 1 MT CGL feed)
         n2_cost_usd = feed * 5.37803 * (n2_p / fx)
         cfw_cost_usd = feed * 0.84234 * (water_p / fx)
         dmw_cost_usd = feed * 0.09955 * dmw_p_usd
         bfw_cost_usd = feed * 0.32987 * bfw_p_usd
 
-        util1_cost = n2_cost_usd+cfw_cost_usd+dmw_cost_usd+bfw_cost_usd
+        util1_cost = n2_cost_usd + cfw_cost_usd + dmw_cost_usd + bfw_cost_usd
         
-        # NaOH conversion assumption: Treated as chemical rate relative to standard unit values
         naoh_cost_usd = feed * 0.02356 * (naoh_p * 1000 / fx) 
-        
         fac_cost_usd = feed * 0.00088 * fac_p_usd
         rac_cost_usd = feed * 0.00377 * rac_p_usd
-        chem1_cost = naoh_cost_usd+ fac_cost_usd +rac_cost_usd
+        chem1_cost = naoh_cost_usd + fac_cost_usd + rac_cost_usd
         
         variable_costs_usd = util1_cost + chem1_cost
         
-        # 4. Other Variable Cost (OVC)
         rgl_out = feed * rayong_conv
         ovc_total_usd = rgl_out * ovc_usd_mt_rgl
 
-        wasteres_vol = 0.0282*feed
-        dis1_cost = wasteres_vol*2950/fx
+        wasteres_vol = 0.0282 * feed
+        dis1_cost = wasteres_vol * 2950 / fx
         
         total_vc_usd = variable_costs_usd + ovc_total_usd + dis1_cost
         
-        # 5. By-product Credits Engine
         ygl_credit_usd = feed * 0.1450 * ygl_p_usd
         gl_res_credit_usd = feed * 0.0360 * gl_res_p_usd
         cgl_80_credit_usd = feed * 0.0358 * cgl_80_p_usd
         
         total_bp_credit_usd = ygl_credit_usd + gl_res_credit_usd + cgl_80_credit_usd
         
-        # 6. Margins & Break-Even Pipeline Calculations
         revenue_usd = rgl_out * rgl_p_usd
         net_operational_cost_usd = feed_cost_usd + logistics_cost_usd + total_vc_usd - total_bp_credit_usd
         
@@ -299,10 +294,8 @@ total_ext_rgl = sum(r["rgl_out"] for r in ext_results)
 
 if total_ext_rgl > 0:
     weighted_conv_rate = total_ext_rgl / total_ext_feed
-    # OVC is now part of total fixed (non-feed) costs, so break-even and sensitivity are automatically correct
-    tot_ext_fixed_costs = sum(r["chem_cost"] + r["util_cost"] + r["ovc_total_thb"] - r["bp_credit"] for r in ext_results)
+    tot_ext_fixed_costs = sum(r["chem_cost"] + r["util_cost"] + r["ovc_total_thb"] - r["bp_credit"]  + r["dis_cost"]for r in ext_results)
     
-    # P2F = RGL selling price - CGL feed cost per kg of RGL product
     p2f_thb_kg = rgl_p_thb - (sum(r["feed_cost"] for r in ext_results) / (total_ext_rgl * 1000))
     p2f_usd_mt = p2f_thb_kg * 1000 / fx
     
@@ -340,8 +333,6 @@ if total_rayong_rgl > 0:
     rayong_overall_cm_usd = sum(r["cm_usd"] * r["rgl_out"] for r in rayong_results) / total_rayong_rgl
     rayong_overall_cm_thb = rayong_overall_cm_usd * fx / 1000
     
-    # Rayong Cost Constants for Feed-based calculations
-    # Max Feedstock Price (USD/MT CGL) = (RGL Price * Yield) - Logistics - VC + Credits
     tot_rayong_operational_vc_usd = sum(r["variable_costs_usd"] for r in rayong_results)
     tot_rayong_ovc_usd = sum(r["ovc_total_usd"] for r in rayong_results)
     
@@ -351,7 +342,6 @@ else:
     rayong_weighted_conv = 0.75500; rayong_logistics_usd_mt_rgl = 0.0; rayong_vc_usd_mt_rgl = 0.0; rayong_bp_usd_mt_rgl = 0.0
     rayong_overall_cm_usd = 0.0; rayong_overall_cm_thb = 0.0; be_rayong_cgl_purchase_price_thb = 0.0; tot_rayong_vc_usd = 0.0; tot_rayong_bp_usd = 0.0
 
-# Helper function to dynamically evaluate CGL limit based on targeted CM
 def calc_sens_cgl_current(target_cm_usd):
     if total_ext_feed <= 0: return 0.0
     target_cm_thb = target_cm_usd * fx / 1000
@@ -360,8 +350,6 @@ def calc_sens_cgl_current(target_cm_usd):
 
 def calc_sens_cgl_rayong(target_cm_usd):
     if total_rayong_feed <= 0: return 0.0
-    # Target RGL CM (USD/MT RGL) -> translate back to CGL limit
-    # Max CGL Price (USD/MT CGL) = (RGL Price - Target RGL CM) * Yield - Logistics - VC(per CGL) + Credits(per CGL)
     vc_per_cgl = tot_rayong_vc_usd / total_rayong_feed
     credits_per_cgl = tot_rayong_bp_usd / total_rayong_feed
     max_cgl_usd_mt = (rgl_p_usd - target_cm_usd) * rayong_weighted_conv - 40.00 - vc_per_cgl + credits_per_cgl
@@ -376,7 +364,6 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "📈 Step 3: CGL Price Sensitivity Analysis",
     "📑 Step 4: Audit Trail & Calculation Details"
 ])
- 
 
 # -----------------------------------------------------------------------------
 # TAB 1: WORKFLOW LOGIC & DATA MANAGEMENT
@@ -429,6 +416,7 @@ with tab1:
         s_fuel = u_col3.number_input("Fuel Oil(Ton)", value=float(preset["fuel"]), format="%.3f")
         s_n2 = u_col4.number_input("Nitrogen Gas (Nm3)", value=float(preset["n2"]), format="%.3f")
         s_bio = u_col5.number_input("Biogas(m3)", value=float(preset["biogas"]), format="%.3f")
+        s_ds = u_col1.number_input("Diesel (L)", value=float(preset.get("ds", 3.1)), format="%.3f")
         
         st.markdown("---")
         st.markdown("### 🔹 By-product Credit Matrix (% conversion from CGL feed)")
@@ -446,7 +434,7 @@ with tab1:
                 st.session_state.suppliers.append({
                     "name": s_name.strip(), "price": s_price, "qty": s_qty, "conv": s_conv,
                     "naoh": s_naoh, "fac": s_fac, "rac": s_rac,
-                    "elec": s_elec, "water": s_water, "fuel": s_fuel, "n2": s_n2, "biogas": s_bio,
+                    "elec": s_elec, "water": s_water, "fuel": s_fuel, "n2": s_n2, "biogas": s_bio, "ds": s_ds,
                     "ygl_conv": s_ygl, "gl_res_conv": s_glr
                 })
                 st.success(f"🎉 Configuration updated successfully for entity: {s_name.strip()}")
@@ -476,7 +464,6 @@ with tab1:
 with tab2:
     st.markdown('<div class="section-container">📊 Summary & Break-Even Optimization Analysis</div>', unsafe_allow_html=True)
     
-    # Unified Overview Cards for Current Model
     avg_ext_cm_usd = overall_cm_usd
     avg_ext_cm_thb = overall_cm_thb
     
@@ -509,7 +496,7 @@ with tab2:
                 <p style="margin:0; color:#64748B; font-size:15px;">{p2f_thb_kg:,.3f} THB/kg</p>
             </div>
         """, unsafe_allow_html=True)
-       
+        
     with met_col2:
         st.markdown(f"""
             <div style="background-color: #F8FAFC; padding: 18px; border-radius: 10px; border: 1px solid #CBD5E1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
@@ -537,7 +524,6 @@ with tab2:
             </div>
         """, unsafe_allow_html=True)
 
-    # ── RAYONG RELOCATION SIMULATION PERFORMANCE CARD ──
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🏭 Rayong Relocation Case Analysis Overview")
     
@@ -562,7 +548,6 @@ with tab2:
     else:
         st.warning("No data found to run Rayong simulation metrics. Please define active procurement parameters in Step 1.")
 
-    # ── HEAD-TO-HEAD COMPARISON MATRIX SYSTEM ──
     st.markdown("### 🔄 Cross-Operational Model Comparison Matrix")
     
     comparison_data = {
@@ -593,7 +578,6 @@ with tab2:
     }
     st.table(pd.DataFrame(comparison_data).set_index("Key Financial Indicator Model"))
 
-    # ── PROFESSIONAL REPORTLAB EXECUTIVE SUMMARY GENERATOR ──
     st.markdown("---")
     st.markdown("### 📥 Management Performance Report Export")
     
@@ -656,7 +640,6 @@ with tab2:
         story.append(t_comp)
         story.append(Spacer(1, 14))
 
-        # ── EXPORT PIPELINE: SENSITIVITY TABLE FOR CURRENT AND RAYONG SETUP ──
         story.append(Paragraph("3. Target Margin Sensitivity Analysis (Required CGL Purchase Price Limits)", h2_style))
         sens_data = [
             ["Target RGL CM", "ME2 Setup CGL Price", "ME1 Setup CGL Price", "Risk Assessment Tier"],
@@ -680,7 +663,7 @@ with tab2:
         doc.build(story)
         buffer.seek(0)
         return buffer.getvalue()
-       
+        
     if len(ext_results) > 0:
         pdf_data = generate_pdf()
         st.download_button(
@@ -702,21 +685,17 @@ with tab3:
     if total_ext_rgl > 0 and total_rayong_rgl > 0:
         current_avg_cgl_p = sum(s["price"] * s["qty"] for s in st.session_state.suppliers) / total_ext_feed
 
-        # Setup CGL X-Axis range boundaries
         cgl_prices = np.linspace(max(0, current_avg_cgl_p - 6), current_avg_cgl_p + 6, 100)
         
-        # Calculate matching CM arrays for both setups
         cm_usd_current = []
         cm_usd_rayong = []
         
         for cp in cgl_prices:
-            # Current Setup Logic
             total_cost_thb = (total_ext_feed * cp * 1000) + tot_ext_fixed_costs
             revenue_thb = total_ext_rgl * rgl_p_thb * 1000
             cm_thb_kg = (revenue_thb - total_cost_thb) / (total_ext_rgl * 1000)
             cm_usd_current.append(cm_thb_kg * 1000 / fx)
             
-            # Rayong Setup Logic
             feed_cost_usd_rayong = total_rayong_feed * ((cp * 1000) / fx)
             net_cost_usd_rayong = feed_cost_usd_rayong + tot_rayong_logistics_usd + tot_rayong_vc_usd - tot_rayong_bp_usd
             rev_usd_rayong = total_rayong_rgl * rgl_p_usd
@@ -725,29 +704,25 @@ with tab3:
 
         fig = go.Figure()
         
-        # 1. Plot Curves
         fig.add_trace(go.Scatter(x=cgl_prices, y=cm_usd_current, mode='lines', name='Current Setup CM Curve', line=dict(color='#2563EB', width=4)))
         fig.add_trace(go.Scatter(x=cgl_prices, y=cm_usd_rayong, mode='lines', name='Rayong Setup CM Curve', line=dict(color='#9333EA', width=4, dash='dash')))
         
-        # 2. Add Break-Even Markers/Points for Current Setup
         fig.add_trace(go.Scatter(x=[be_cgl_purchase_price_thb], y=[0], mode='markers+text',
                                  marker=dict(color='#DC2626', size=12, symbol="x"),
                                  text=[f'Current Break-Even<br>{be_cgl_purchase_price_thb:.2f} THB/kg'],
                                  textposition="top right", name='Current Break-Even Limit'))
                                  
-        # 3. Add Break-Even Markers/Points for Rayong Setup
         fig.add_trace(go.Scatter(x=[be_rayong_cgl_purchase_price_thb], y=[0], mode='markers+text',
                                  marker=dict(color='#A855F7', size=12, symbol="diamond"),
                                  text=[f'Rayong Break-Even<br>{be_rayong_cgl_purchase_price_thb:.2f} THB/kg'],
                                  textposition="bottom left", name='Rayong Break-Even Limit'))
 
-        # Horizontal Target Guideline Markers
         fig.add_hline(y=60, line_dash="dot", line_color="#EF4444", opacity=0.5, annotation_text="Critical Margin Floor (60 USD)")
         fig.add_hline(y=120, line_dash="dot", line_color="#22C55E", opacity=0.5, annotation_text="Optimal Target Window (120 USD)")
-        fig.add_hline(y=0, line_color="#000000", line_width=1.5) # Absolute Base Zero
+        fig.add_hline(y=0, line_color="#000000", line_width=1.5)
         
         fig.update_layout(
-            title=dict(text=f"Comparative Price Sensitivity Mapping: Current Model vs Rayong Relocation", font=dict(size=16)),
+            title=dict(text="Comparative Price Sensitivity Mapping: Current Model vs Rayong Relocation", font=dict(size=16)),
             xaxis_title="External CGL Purchase Price (THB/kg)",
             yaxis_title="Simulated Contribution Margin (USD/MT Finished RGL)",
             hovermode="x unified",
@@ -757,7 +732,6 @@ with tab3:
 
         st.plotly_chart(fig, use_container_width=True)
 
-        # Dynamic specific metrics bounds text
         cgl_curr_120 = calc_sens_cgl_current(120)
         cgl_ray_120 = calc_sens_cgl_rayong(120)
 
@@ -769,15 +743,9 @@ with tab3:
     else:
         st.warning("⚠️ Insufficient simulation parameter baselines found. Please configure active supplier profiles within Step 1 to initialize the comparative mapping engine.")
 
-# =============================================================================
-# APPEND: Place this entire block at the very end of the script,
-#         after the closing of the `with tab3:` block.
-# =============================================================================
- 
 # -----------------------------------------------------------------------------
 # TAB 4: AUDIT TRAIL & CALCULATION DETAILS
 # -----------------------------------------------------------------------------
-        
 with tab4:
     st.markdown('<div class="section-container">📑 Step 4: Audit Trail & Granular Calculation Details</div>', unsafe_allow_html=True)
     st.markdown(
@@ -785,81 +753,73 @@ with tab4:
         "All formulas are re-computed directly from the raw supplier data and sidebar parameters — "
         "identical to the core calculation engine — so the accounting team can independently verify every figure."
     )
- 
+
     if st.session_state.suppliers:
- 
-        # ── Rayong model constants (mirror of calculate_rgl_rayong) ──
+
         _RAYONG_CONV                  = 0.75500
-        _LOGISTICS_USD_MT_CGL         = 40.00
-        _OVC_USD_MT_RGL               = 89.00
- 
-        # ══════════════════════════════════════════════════════════════
+        _LOGISTICS_USD_MT_CGL         = ovc_ext_usd_mt_rgl12
+        _OVC_USD_MT_RGL               = ovc_ext_usd_mt_rgl1
+
         # SECTION A: CURRENT MODEL (EXTERNAL SETUP) AUDIT TABLE
-        # ══════════════════════════════════════════════════════════════
         st.markdown("---")
         st.markdown("### 🏭 A. Current Model (External / ME2 Setup) — Full Cost Breakdown")
         st.caption(
             "All monetary values are in **THB** unless the column header specifies otherwise. "
             "Qty columns show physical consumption quantities."
         )
- 
+
         current_rows = []
         for s in st.session_state.suppliers:
             feed = s["qty"]
             if feed <= 0:
                 continue
- 
-            # ── Feed ──
+
             feed_cost_thb = feed * s["price"] * 1000
- 
-            # ── Chemicals ──
+
             naoh_qty        = feed * s["naoh"]
             naoh_cost_thb   = feed * s["naoh"] * naoh_p
- 
+
             fac_qty         = feed * s["fac"]
             fac_cost_thb    = feed * s["fac"] * fac_p_usd * fx / 1000
- 
+
             rac_qty         = feed * s["rac"]
             rac_cost_thb    = feed * s["rac"] * rac_p_usd * fx / 1000
- 
+
             total_chem_thb  = naoh_cost_thb + fac_cost_thb + rac_cost_thb
- 
-            # ── Utilities ──
+
             elec_qty        = feed * s["elec"]
             elec_cost_thb   = feed * s["elec"] * elec_p
- 
+
             water_qty       = feed * s["water"]
             water_cost_thb  = feed * s["water"] * water_p
- 
+
             fuel_qty        = feed * s["fuel"]
             fuel_cost_thb   = feed * (s["fuel"] * fuel_p) / 72
- 
+
             n2_qty          = feed * s["n2"]
             n2_cost_thb     = feed * s["n2"] * n2_p
- 
+
             biogas_qty      = feed * s["biogas"]
             biogas_cost_thb = feed * s["biogas"] * biogas_p
- 
+
             total_util_thb  = elec_cost_thb + water_cost_thb + fuel_cost_thb + n2_cost_thb + biogas_cost_thb
- 
-            # ── By-product Credits ──
+
             ygl_credit_thb    = feed * (s["ygl_conv"] / 100) * ygl_p_usd * fx
             gl_res_credit_thb = feed * (s["gl_res_conv"] / 100) * gl_res_p_usd * fx
             total_bp_thb      = ygl_credit_thb + gl_res_credit_thb
- 
-            # ── RGL Output & OVC ──
+
             rgl_yield_rate  = s["conv"]
             rgl_output_mt   = feed * s["conv"]
- 
-            # OVC deduction: mirrors the sidebar ovc_ext_usd_mt_rgl parameter applied in calculate_rgl_external
-            ovc_cost_thb    = rgl_output_mt * ovc_ext_usd_mt_rgl * fx
- 
+
+            # FIX: Used ovc_ext_usd_mt_rgl2 for ME2
+            ovc_cost_thb    = rgl_output_mt * ovc_ext_usd_mt_rgl2 * fx
+
             total_capital_cost_thb = feed_cost_thb + total_chem_thb + total_util_thb + ovc_cost_thb - total_bp_thb
             total_revenue_thb      = rgl_p_thb * rgl_output_mt * 1000
- 
+
             cm_thb_kg  = (total_revenue_thb - total_capital_cost_thb) / (rgl_output_mt * 1000) if rgl_output_mt > 0 else 0.0
             cm_usd_mt  = cm_thb_kg * 1000 / fx if rgl_output_mt > 0 else 0.0
- 
+
             current_rows.append({
                 "Supplier Name":                  s["name"],
                 "Feed Quantity (MT)":             feed,
@@ -888,17 +848,16 @@ with tab4:
                 "Total By-Product Credit (THB)":  total_bp_thb,
                 "RGL Yield Rate":                 rgl_yield_rate,
                 "RGL Output (MT)":                rgl_output_mt,
-                "OVC Rate (USD/MT RGL)":          ovc_ext_usd_mt_rgl,
+                "OVC Rate (USD/MT RGL)":         ovc_ext_usd_mt_rgl2,
                 "OVC Cost (THB)":                 ovc_cost_thb,
                 "Total Capital Cost (THB)":       total_capital_cost_thb,
                 "Total Revenue (THB)":            total_revenue_thb,
                 "Contribution Margin (THB/kg)":   cm_thb_kg,
                 "Contribution Margin (USD/MT)":   cm_usd_mt,
             })
- 
+
         df_current = pd.DataFrame(current_rows)
- 
-        # Format mapping for Current Model table
+
         current_fmt = {
             "Feed Quantity (MT)":             "{:,.3f}",
             "Feed Price (THB/kg)":            "{:,.3f}",
@@ -926,19 +885,19 @@ with tab4:
             "Total By-Product Credit (THB)":  "{:,.2f}",
             "RGL Yield Rate":                 "{:.4f}",
             "RGL Output (MT)":                "{:,.3f}",
-            "OVC Rate (USD/MT RGL)":          "{:,.2f}",
+            "OVC Rate (USD/MT RGL)":         "{:,.2f}",
             "OVC Cost (THB)":                 "{:,.2f}",
             "Total Capital Cost (THB)":       "{:,.2f}",
             "Total Revenue (THB)":            "{:,.2f}",
             "Contribution Margin (THB/kg)":   "{:,.4f}",
             "Contribution Margin (USD/MT)":   "{:,.2f}",
         }
- 
+
         st.dataframe(
             df_current.style.format(current_fmt),
             use_container_width=True
         )
- 
+
         current_csv = df_current.to_csv(index=False).encode("utf-8")
         st.download_button(
             label="📥 Download Current Model Audit Table (CSV)",
@@ -947,78 +906,70 @@ with tab4:
             mime="text/csv",
             use_container_width=True,
         )
- 
-        # ══════════════════════════════════════════════════════════════
+
         # SECTION B: RAYONG RELOCATION MODEL AUDIT TABLE
-        # ══════════════════════════════════════════════════════════════
         st.markdown("---")
         st.markdown("### 🏗️ B. Rayong Relocation Model (ME1 Setup) — Full Cost Breakdown")
         st.caption(
             "All monetary values are in **USD** unless the column header specifies otherwise. "
             "Fixed Rayong constants: Yield = 0.75500 | Logistics = 40.00 USD/MT CGL | OVC = 89.00 USD/MT RGL."
         )
- 
+
         rayong_rows = []
         for s in st.session_state.suppliers:
             feed = s["qty"]
             if feed <= 0:
                 continue
- 
-            # ── Feed ──
+
             feed_cost_usd = (feed * s["price"] * 1000) / fx
- 
-            # ── Logistics ──
+
             logistics_cost_usd = feed * _LOGISTICS_USD_MT_CGL
- 
-            # ── Utilities (Rayong-specific fixed consumption rates) ──
+
             n2_qty_r        = feed * 5.37803
             n2_cost_usd     = feed * 5.37803 * (n2_p / fx)
- 
+
             water_qty_r     = feed * 0.84234
             water_cost_usd  = feed * 0.84234 * (water_p / fx)
- 
+
             dmw_qty_r       = feed * 0.09955
             dmw_cost_usd    = feed * 0.09955 * dmw_p_usd
- 
+
             bfw_qty_r       = feed * 0.32987
             bfw_cost_usd    = feed * 0.32987 * bfw_p_usd
- 
-            # ── Chemicals (Rayong-specific fixed consumption rates) ──
-            naoh_qty_r      = feed * 0.02356 * 1000        # kg
+
+            naoh_qty_r      = feed * 0.02356 * 1000
             naoh_cost_usd   = feed * 0.02356 * (naoh_p * 1000 / fx)
- 
-            fac_qty_r       = feed * 0.00088 * 1000        # kg
+
+            fac_qty_r       = feed * 0.00088 * 1000
             fac_cost_usd    = feed * 0.00088 * fac_p_usd
- 
-            rac_qty_r       = feed * 0.00377 * 1000        # kg
+
+            rac_qty_r       = feed * 0.00377 * 1000
             rac_cost_usd    = feed * 0.00377 * rac_p_usd
- 
+
             total_variable_costs_usd = (
                 n2_cost_usd + water_cost_usd + dmw_cost_usd + bfw_cost_usd
                 + naoh_cost_usd + fac_cost_usd + rac_cost_usd
             )
- 
-            # ── RGL Output & OVC ──
+
             rgl_output_r    = feed * _RAYONG_CONV
-            ovc_total_usd   = rgl_output_r * _OVC_USD_MT_RGL
- 
-            # ── By-product Credits ──
+            # FIX: Used ovc_ext_usd_mt_rgl1 for ME1/Rayong
+            ovc_total_usd   = rgl_output_r * ovc_ext_usd_mt_rgl1
+
             ygl_credit_usd    = feed * 0.1450 * ygl_p_usd
             gl_res_credit_usd = feed * 0.0360 * gl_res_p_usd
             cgl_80_credit_usd = feed * 0.0358 * cgl_80_p_usd
             total_bp_usd      = ygl_credit_usd + gl_res_credit_usd + cgl_80_credit_usd
- 
-            # ── Net Cost & Revenue ──
+
             net_operational_cost_usd = (
                 feed_cost_usd + logistics_cost_usd
                 + total_variable_costs_usd + ovc_total_usd
                 - total_bp_usd
             )
             total_revenue_usd = rgl_output_r * rgl_p_usd
- 
+
             cm_usd_mt_r = (total_revenue_usd - net_operational_cost_usd) / rgl_output_r if rgl_output_r > 0 else 0.0
             cm_thb_kg_r = cm_usd_mt_r * fx / 1000
- 
+
             rayong_rows.append({
                 "Supplier Name":                     s["name"],
                 "Feed Quantity (MT)":                feed,
@@ -1027,7 +978,7 @@ with tab4:
                 "Logistics Cost (USD)":              logistics_cost_usd,
                 "Nitrogen Qty (Nm3)":                n2_qty_r,
                 "Nitrogen Cost (USD)":               n2_cost_usd,
-                "Clarified Water Qty (m3)":          water_qty_r,
+                "Clarified Water Qty (m3)":         water_qty_r,
                 "Water Cost (USD)":                  water_cost_usd,
                 "DMW Qty (units)":                   dmw_qty_r,
                 "DMW Cost (USD)":                    dmw_cost_usd,
@@ -1052,10 +1003,9 @@ with tab4:
                 "Contribution Margin (USD/MT)":      cm_usd_mt_r,
                 "Contribution Margin (THB/kg)":      cm_thb_kg_r,
             })
- 
+
         df_rayong = pd.DataFrame(rayong_rows)
- 
-        # Format mapping for Rayong Model table
+
         rayong_fmt = {
             "Feed Quantity (MT)":                "{:,.3f}",
             "Feed Price (THB/kg)":               "{:,.3f}",
@@ -1063,7 +1013,7 @@ with tab4:
             "Logistics Cost (USD)":              "{:,.2f}",
             "Nitrogen Qty (Nm3)":                "{:,.3f}",
             "Nitrogen Cost (USD)":               "{:,.2f}",
-            "Clarified Water Qty (m3)":          "{:,.3f}",
+            "Clarified Water Qty (m3)":         "{:,.3f}",
             "Water Cost (USD)":                  "{:,.2f}",
             "DMW Qty (units)":                   "{:,.4f}",
             "DMW Cost (USD)":                    "{:,.2f}",
@@ -1088,12 +1038,12 @@ with tab4:
             "Contribution Margin (USD/MT)":      "{:,.2f}",
             "Contribution Margin (THB/kg)":      "{:,.4f}",
         }
- 
+
         st.dataframe(
             df_rayong.style.format(rayong_fmt),
             use_container_width=True
         )
- 
+
         rayong_csv = df_rayong.to_csv(index=False).encode("utf-8")
         st.download_button(
             label="📥 Download Rayong Model Audit Table (CSV)",
@@ -1102,7 +1052,7 @@ with tab4:
             mime="text/csv",
             use_container_width=True,
         )
- 
+
     else:
         st.warning(
             "No active supplier records available for auditing. "
