@@ -123,7 +123,7 @@ with st.sidebar:
     st.markdown("---")
     
     with st.expander("💰 1. Market & By-product Prices", expanded=True):
-        ygl_p_usd = st.number_input("YGL Selling Price (USD/MT)", value=643.0, help="Market value of Yellow Glycerin by-product.")
+        ygl_p_usd = st.number_input("YGL Selling Price (USD/MT)", value=572.0, help="Market value of Yellow Glycerin by-product.")
         gl_res_p_usd = st.number_input("GL Residue Selling Price (USD/MT)", value=31.98, help="Selling price of chemical waste residue for secondary revenue.")
         fx = st.number_input("Exchange Rate FX (THB/USD)", value=31.25, help="Foreign exchange conversion rate.")
         
@@ -141,7 +141,7 @@ with st.sidebar:
         ds_p = st.number_input("Diesel Cost (THB/L)", value=30.00)
 
     with st.expander("🏭 4. Rayong Operational Cost Parameters", expanded=False):
-        cgl_80_p_usd = st.number_input("CGL 80% Price (USD/MT)", value=777.89)
+        cgl_80_p_usd = st.number_input("CGL 80% Price (USD/MT)", value=572.89)
         dmw_p_usd = st.number_input("DMW Price (USD/unit)", value=2.019)
         bfw_p_usd = st.number_input("BFW Price (USD/unit)", value=6.368)
 
